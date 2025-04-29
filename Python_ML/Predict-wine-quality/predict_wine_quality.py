@@ -38,6 +38,42 @@ plt.clf()
 from sklearn.metrics import f1_score
 y_pred_train = clf_no_reg.predict(X_train)
 y_pred_test = clf_no_reg.predict(X_test)    
-print('Training Score', f1_score(y_train, y_pred_train))
-print('Testing Score', f1_score(y_test, y_pred_test))
+print('Training Score no regularization', f1_score(y_train, y_pred_train))
+print('Testing Score no regularization', f1_score(y_test, y_pred_test))
+
+#Logististic regression with L2 regularization
+
+clf_default = LogisticRegression()
+clf_default.fit(X_train, y_train)
+y_pred_train = clf_default.predict(X_train)
+y_pred_test = clf_default.predict(X_test)    
+print('Training Score L2 default', f1_score(y_train, y_pred_train))
+print('Testing Score L2 default', f1_score(y_test, y_pred_test))
+
+"""
+Scores for f1 are same with no regularization and L2 regularization
+Need to tune C parameter to see if it improves the score
+Smaller C --> more regularization
+"""
+
+#coarse tuning of C parameter
+C_array = [0.0001, 0.001, 0.01, 0.1, 1]
+training_array = []
+testing_array = []
+for i in C_array:
+    clf = LogisticRegression(C = i)
+    clf.fit(X_train, y_train)
+    y_pred_train = clf.predict(X_train)
+    y_pred_test = clf.predict(X_test)    
+    training_array.append(f1_score(y_train, y_pred_train))
+    testing_array.append(f1_score(y_test, y_pred_test))
+plt.plot(C_array,training_array)
+plt.plot(C_array,testing_array)
+plt.xscale('log')
+plt.show()
+plt.clf()
+
+"""
+The conclusion: The optimal C seems to be somewhere around 0.001 
+"""
 
