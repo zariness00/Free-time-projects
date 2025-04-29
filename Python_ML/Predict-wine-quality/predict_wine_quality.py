@@ -29,9 +29,9 @@ predictors = features.columns
 coefficients = clf_no_reg.coef_.ravel()
 coef = pd.Series(coefficients,predictors).sort_values()
 coef.plot(kind='bar', title = 'Coefficients (no regularization)')
-# plt.tight_layout()
-# plt.show()
-# plt.clf()
+plt.tight_layout()
+plt.show()
+plt.clf()
 
 #For classifiers, it is important that the classifier not only has high accuracy, but also high precision and recall, i.e., a low false positive and false negative rate.
 #f1 score is the weighted mean of precision and recall, captures the performance of a classifier holistically. 
@@ -69,9 +69,9 @@ for i in C_array:
     testing_array.append(f1_score(y_test, y_pred_test))
 plt.plot(C_array,training_array)
 plt.plot(C_array,testing_array)
-# plt.xscale('log')
-# plt.show()
-# plt.clf()
+plt.xscale('log')
+plt.show()
+plt.clf()
 
 """
 The conclusion: The optimal C seems to be somewhere around 0.001 
@@ -91,3 +91,25 @@ clf_best_ridge = LogisticRegression(C = grid_search.best_params_['C'])
 clf_best_ridge.fit(X_train, y_train)
 y_pred_best = clf_best_ridge.predict(X_test)
 print('Testing Score best C:', f1_score(y_test, y_pred_best))
+
+
+from sklearn.linear_model import LogisticRegressionCV
+C_array = np.logspace(-2, 2, 100) 
+clf_l1 = LogisticRegressionCV(penalty = 'l1', Cs = C_array, scoring = 'f1', cv = 5, solver = "liblinear")
+clf_l1.fit(X, y)
+
+print('Best C:', clf_l1.C_)
+print('Best coefficients:', clf_l1.coef_)
+coefficients = clf_l1.coef_.ravel()
+coef = pd.Series(coefficients,predictors).sort_values()
+
+plt.figure(figsize = (12,8))
+coef.plot(kind='bar', title = 'Coefficients for tuned L1')
+plt.tight_layout()
+plt.show()
+plt.clf()
+
+"""
+L1 classifier has set density feature to 0
+This means that the model has determined that this feature is not useful for predicting the target variable.
+"""
