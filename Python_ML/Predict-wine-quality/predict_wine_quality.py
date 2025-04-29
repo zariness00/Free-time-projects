@@ -29,9 +29,9 @@ predictors = features.columns
 coefficients = clf_no_reg.coef_.ravel()
 coef = pd.Series(coefficients,predictors).sort_values()
 coef.plot(kind='bar', title = 'Coefficients (no regularization)')
-plt.tight_layout()
-plt.show()
-plt.clf()
+# plt.tight_layout()
+# plt.show()
+# plt.clf()
 
 #For classifiers, it is important that the classifier not only has high accuracy, but also high precision and recall, i.e., a low false positive and false negative rate.
 #f1 score is the weighted mean of precision and recall, captures the performance of a classifier holistically. 
@@ -69,11 +69,25 @@ for i in C_array:
     testing_array.append(f1_score(y_test, y_pred_test))
 plt.plot(C_array,training_array)
 plt.plot(C_array,testing_array)
-plt.xscale('log')
-plt.show()
-plt.clf()
+# plt.xscale('log')
+# plt.show()
+# plt.clf()
 
 """
 The conclusion: The optimal C seems to be somewhere around 0.001 
 """
 
+C_array = np.logspace(-4, -2, 100) #obtain 100 values between 0.0001 and 0.01
+tuning_C = {"C": C_array}
+
+from sklearn.model_selection import GridSearchCV
+grid_search = GridSearchCV(LogisticRegression(), param_grid = tuning_C, scoring = 'f1', cv = 5)
+
+grid_search.fit(X_train, y_train)
+print('Best C:', grid_search.best_params_)
+print('Best Score:', grid_search.best_score_)
+
+clf_best_ridge = LogisticRegression(C = grid_search.best_params_['C'])
+clf_best_ridge.fit(X_train, y_train)
+y_pred_best = clf_best_ridge.predict(X_test)
+print('Testing Score best C:', f1_score(y_test, y_pred_best))
