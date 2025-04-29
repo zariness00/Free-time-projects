@@ -3,7 +3,7 @@ import pandas as pd
 import seaborn as sb
 import matplotlib.pyplot as plt
 
-df = pd.read_csv('winequality-red.csv', sep=';')
+df = pd.read_csv('/Users/zoryawka/Desktop/Coding/Free-time-projects/Python_ML/Predict-wine-quality/dataset/winequality-red.csv', sep=';')
 
 df["quality"] = (df["quality"] > 5).astype(int)
 # print(df.head(20))
