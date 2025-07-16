@@ -44,6 +44,8 @@ Accuracy score for default random forest: 82.282 %
 - **Best Test Accuracy:** 84.370 %
 
 - ***Max depth for maximum accuracy on test set:*** 18
+- **Visualization: Accuracy vs. Max Depth plot shows the bias-variance tradeoff**
+  <img width="400" height="400" alt="Figure_1" src="https://github.com/user-attachments/assets/6dc37239-cfa8-453f-b4a8-5f7d0f0e7528" />
 
 ## Feature Importance
 Top 5 most important features as determined by the best-performing Random Forest model (max_depth=18):
