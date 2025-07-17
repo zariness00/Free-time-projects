@@ -1,6 +1,6 @@
-# Car Evaluation Classification with AdaBoost
+# Car Evaluation Classification with Boosting models
 
-This project implements a binary classification model using **AdaBoost** with a decision stump as its base estimator. The model predicts car acceptability based on several categorical features such as buying price, maintenance cost, safety, and more.
+This project uses ensemble learning techniques to classify car acceptability (`unacc` vs. `acc`, `good`, `vgood`) based on categorical car features.
 
 ---
 
@@ -25,10 +25,11 @@ Categorical features one-hot encoded:
 
 ---
 
-## Model
+## Models Used
 
-- **Base Model:** `DecisionTreeClassifier(max_depth=1)` (a decision stump)
-- **Ensemble Method:** `AdaBoostClassifier(n_estimators=5)`
+- **AdaBoostClassifier** with `DecisionTreeClassifier(max_depth=1)`
+- **GradientBoostingClassifier** with `n_estimators=15`
+
 - **Evaluation Metrics:**
   - Accuracy
   - Precision
@@ -40,7 +41,7 @@ Categorical features one-hot encoded:
 
 ## Results
 
-Performance on the test set:
+Performance on the test set(AdaBoosting):
 
 Accuracy: 0.8574
 Precision: 0.7247
@@ -48,10 +49,23 @@ Recall: 0.8377
 F1 Score: 0.7771
 
 
-Confusion matrix:
+Confusion matrix(AdaBoosting):
              predicted yes    predicted no
 actual yes 129 25
 actual no 49 316
+
+Performance on the test set(Gradient Boosting):
+
+Accuracy: 0.8979
+Precision: 0.7886
+Recall: 0.8961
+F1 Score: 0.8389
+
+
+Confusion matrix(Gradient Boosting):
+             predicted yes    predicted no
+actual yes 138 16
+actual no 37 328
 
 ##  Platform
 
