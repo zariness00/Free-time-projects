@@ -49,10 +49,13 @@ Recall: 0.8377
 F1 Score: 0.7771
 
 
-Confusion matrix(AdaBoosting):
-             predicted yes    predicted no
-actual yes 129 25
-actual no 49 316
+Confusion Matrix (AdaBoost)
+
+|               | Predicted Yes | Predicted No |
+|---------------|---------------|---------------|
+| Actual Yes    | 129           | 25            |
+| Actual No     | 49            | 316           |
+
 
 Performance on the test set(Gradient Boosting):
 
@@ -63,9 +66,12 @@ F1 Score: 0.8389
 
 
 Confusion matrix(Gradient Boosting):
-             predicted yes    predicted no
-actual yes 138 16
-actual no 37 328
+
+|               | Predicted Yes | Predicted No |
+|---------------|---------------|---------------|
+| Actual Yes    | 138           | 16            |
+| Actual No     | 37            | 328           |
+
 
 ##  Platform
 
